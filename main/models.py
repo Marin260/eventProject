@@ -6,7 +6,7 @@ from django.db.models.deletion import CASCADE
 class Mjesto(models.Model):
     postanski_broj = models.IntegerField()
     naziv_mjesta = models.CharField(max_length = 50)
-    adresa = models.CharField(max_length = 50)
+    drazava = models.CharField(max_length = 50)
 
     def __str__(self):
         return self.naziv_mjesta
