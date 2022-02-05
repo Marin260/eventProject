@@ -11,17 +11,17 @@
     <header class="">
         <nav>
             {% if user.is_authenticated %}
-                <a href="#">Home</a><br>
-                <a href="#">Logout</a><br>
+                <a href="/">Home</a><br>
+                <a href="/logout/">Logout</a><br>
                 <a href="#">Profile</a><br>
             {% else %}
-                <a href="#">Home</a><br>
-                <a href="#">Login</a><br>
-                <a href="#">Sign in</a><br>
+                <a href="/">Home</a><br>
+                <a href="/login/">Login</a><br>
+                <a href="/signup/">Sign Up</a><br>
             {% endif %}
         </nav> 
     </header>
-    <div class="p-4 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 select-none">
+    <div class="p-7 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 select-none">
 
     {% for event in events %}
         <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
@@ -45,6 +45,12 @@
                 <p class="font-light text-sm">zainteresirani: {{event.zainteresirani}}</p>
                 <p class="font-light text-sm">dolaze: {{event.dolaze}}</p>
             </div>
+            {% if user.is_authenticated %}
+                <div class="grid grid-cols-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+                    <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                </div>
+            {% endif %}
         </div>
         <br>
     {% endfor %}

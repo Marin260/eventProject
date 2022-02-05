@@ -1,5 +1,7 @@
 import factory
 from .models import *
+from django.contrib.auth.models import User
+
 
 class MjestoFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -41,12 +43,7 @@ class EventFactory(factory.django.DjangoModelFactory):
     mjesto_odrzavanja = factory.Iterator(Mjesto.objects.all())
     zainteresirani =factory.Faker("numerify")
     dolaze =factory.Faker("numerify")
+    korisnici = models.ManyToManyField(User, default=None, blank=True)
 
-class KorisnikFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Korisnik
 
-    username = factory.Faker("profile")
-    password = factory.Faker("sha256")
-    eventi = factory.Iterator(Event.objects.all())
 

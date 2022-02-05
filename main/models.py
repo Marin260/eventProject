@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator
-
+from django.contrib.auth.models import User
+from django.db.models import Count
 
 
 class Mjesto(models.Model):
@@ -11,6 +12,7 @@ class Mjesto(models.Model):
 
     def __str__(self):
         return self.naziv_mjesta
+
 
 class AdminKorisnici(models.Model):
     adresa_ustanove = models.CharField(max_length = 150)
@@ -22,6 +24,7 @@ class AdminKorisnici(models.Model):
     def __str__(self):
         return self.naziv_admina
 
+
 class Event(models.Model):
     naziv_eventa = models.CharField(max_length = 100)
     datum_odrzavanja = models.DateField()
@@ -32,9 +35,15 @@ class Event(models.Model):
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
     zainteresirani = models.IntegerField(validators=[MinValueValidator(0)])
     dolaze = models.IntegerField(validators=[MinValueValidator(0)])
+    korisnici = models.ManyToManyField(User, default=None, blank=True)
 
     def __str__(self):
         return self.naziv_eventa
+
+    def getInterested(self):
+        numOfKorisnik = Count()
+        return self.korisnici.count()
+
 
 class Objava(models.Model):
     naslov_objave = models.CharField(max_length = 100)
@@ -47,10 +56,4 @@ class Objava(models.Model):
     def __str__(self):
         return self.naslov_objave
 
-class Korisnik(models.Model):
-    username = models.CharField(max_length = 50)
-    password = models.CharField(max_length=1000)
-    eventi = models.ManyToManyField(Event, default=None, blank=True)
 
-    def __str__(self):
-        return self.username
