@@ -21,7 +21,7 @@
             {% endif %}
         </nav> 
     </header>
-    <div class="p-7 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 select-none">
+    <div class="p-7 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
 
     {% for event in events %}
         <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
@@ -42,13 +42,13 @@
                 </div>
                 <br><br>
             </div>
-                <p class="font-light text-sm">zainteresirani: {{event.zainteresirani}}</p>
-                <p class="font-light text-sm">dolaze: {{event.dolaze}}</p>
+                <p class="font-light text-sm">zainteresirani: {{event.countZainteresirani}}</p>
+                <p class="font-light text-sm">dolaze: {{event.countDolaze}}</p>
             </div>
             {% if user.is_authenticated %}
                 <div class="grid grid-cols-2">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
-                    <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                    <button type="button" id="add-dolazim" value="{{ event.id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+                    <button type="button" id="add-zainteresirani" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
                 </div>
             {% endif %}
         </div>
