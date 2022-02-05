@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Homepage</title>
+</head>
+<body>
+    <header class="">
+        <nav>
+            {% if user.is_authenticated %}
+                <a href="#">Home</a><br>
+                <a href="#">Logout</a><br>
+                <a href="#">Profile</a><br>
+            {% else %}
+                <a href="#">Home</a><br>
+                <a href="#">Login</a><br>
+                <a href="#">Sign in</a><br>
+            {% endif %}
+        </nav> 
+    </header>
+    <div class="p-4 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 select-none">
+
+    {% for event in events %}
+        <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
+            <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="https://laravelnews.imgix.net/images/tailwindcss.png?ixlib=php-3.3.1" />
+            <div class="p-4">
+            <span class="text-blue-600 font-normal text-base">{{event.mjesto_odrzavanja}}</span>
+            <p class="font-semibold text-xl py-2">{{event.naziv_eventa}}</p>
+            <p class="font-light text-gray-700 text-justify line-clamp-3">{{event.opis_eventa}}</p>
+            <div class="flex flex-wrap mt-10 space-x-4 align-bottom">
+                <img class="w-10 h-10 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAPdvF3u9YGCmWQZDGug3Jy2Eqrb4XuoOQbjozL6ObMiSl_2AvFQGSdpuqNPgADM37GJQ&usqp=CAU" />
+                <div class="flex flex-col space-y-0">
+                {% if event.placanje_ulaza%}
+                    <p class="font-semibold text-base">Cijena ulaza: {{event.cijena_ulaza}}Kn</p>
+                {% else %}
+                    <p class="font-semibold text-base">Besplatan ulaz</p>
+                {% endif %}
+                <p class="font-light text-sm">{{event.datum_odrzavanja}} u {{event.vrijeme_odrzavanja}}</p>
+                </div>
+                <br><br>
+            </div>
+                <p class="font-light text-sm">zainteresirani: {{event.zainteresirani}}</p>
+                <p class="font-light text-sm">dolaze: {{event.dolaze}}</p>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+    </div>
+
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,10 +1,11 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.core.validators import MinValueValidator
 
 
 
 class Mjesto(models.Model):
-    postanski_broj = models.IntegerField()
+    postanski_broj = models.IntegerField(validators=[MinValueValidator(0)])
     naziv_mjesta = models.CharField(max_length = 50)
     drazava = models.CharField(max_length = 50)
 
@@ -14,7 +15,8 @@ class Mjesto(models.Model):
 class AdminKorisnici(models.Model):
     adresa_ustanove = models.CharField(max_length = 150)
     naziv_admina = models.CharField(max_length = 50)
-    kontakt_admina = models.IntegerField()
+    kontakt_admina = models.CharField(max_length = 20)
+    password = models.CharField(max_length=1000)
     mjesto = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
 
     def __str__(self):
@@ -22,14 +24,14 @@ class AdminKorisnici(models.Model):
 
 class Event(models.Model):
     naziv_eventa = models.CharField(max_length = 100)
-    datum_odrzavanja = models.DateTimeField()
+    datum_odrzavanja = models.DateField()
     opis_eventa = models.CharField(max_length = 500)
     placanje_ulaza = models.BooleanField()
-    vrijeme_odrzavanja = models.DateTimeField()
-    cijena_ulaza = models.IntegerField()
+    vrijeme_odrzavanja = models.TimeField()
+    cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
-    zainteresirani = models.IntegerField()
-    dolaze = models.IntegerField()
+    zainteresirani = models.IntegerField(validators=[MinValueValidator(0)])
+    dolaze = models.IntegerField(validators=[MinValueValidator(0)])
 
     def __str__(self):
         return self.naziv_eventa
