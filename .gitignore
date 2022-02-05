@@ -1,3 +1,7 @@
 eventProject/__pycache__/
 main/__pycache__/
+<<<<<<< HEAD
 main/migrations/__pycache__/
+=======
+main/migrations/
+>>>>>>> origin
