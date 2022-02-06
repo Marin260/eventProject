@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    {% csrf_token %}
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script defer src="{% static './js/addParticipants.js' %}"></script>
     <title>Homepage</title>
 </head>
 <body>
@@ -21,7 +25,7 @@
             {% endif %}
         </nav> 
     </header>
-    <div class="p-7 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 select-none">
+    <div class="p-7 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
 
     {% for event in events %}
         <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
@@ -42,19 +46,22 @@
                 </div>
                 <br><br>
             </div>
-                <p class="font-light text-sm">zainteresirani: {{event.zainteresirani}}</p>
-                <p class="font-light text-sm">dolaze: {{event.dolaze}}</p>
+                <p id="zainteresirani-{{ event.id }}" class="font-light text-sm">zainteresirani: {{event.broj_zainteresiranih}}</p>
+                <p id="dolaze-{{ event.id }}" class="font-light text-sm">dolaze: {{event.broj_dolaze}}</p>
             </div>
             {% if user.is_authenticated %}
+                
                 <div class="grid grid-cols-2">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
-                    <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                    <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+
+                    <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
                 </div>
             {% endif %}
         </div>
         <br>
     {% endfor %}
     </div>
+    
 
 
     {% block content %}

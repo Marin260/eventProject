@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.utils import timezone
 
 
 class Mjesto(models.Model):
@@ -26,6 +26,7 @@ class AdminKorisnici(models.Model):
 
 
 class Event(models.Model):
+    date_posted = models.DateTimeField(default=timezone.now)
     naziv_eventa = models.CharField(max_length = 100)
     datum_odrzavanja = models.DateField()
     opis_eventa = models.CharField(max_length = 500)
@@ -33,16 +34,27 @@ class Event(models.Model):
     vrijeme_odrzavanja = models.TimeField()
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
-    zainteresirani = models.IntegerField(validators=[MinValueValidator(0)])
-    dolaze = models.IntegerField(validators=[MinValueValidator(0)])
-    korisnici = models.ManyToManyField(User, default=None, blank=True)
+    zainteresirani = models.ManyToManyField(User, default=None, blank=True, related_name="zainteresirani")
+    broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
+    broj_dolaze = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    #korisnici = models.ManyToManyField(User, default=None, blank=True)
 
     def __str__(self):
         return self.naziv_eventa
 
-    def getInterested(self):
-        numOfKorisnik = Count()
-        return self.korisnici.count()
+
+    def countDolaze(self):
+        """
+        return the count of users attending the event
+        """
+        return self.dolaze.all().count()
+    
+    def countZainteresirani(self):
+        """
+        return the count of users intrested in attending the event
+        """
+        return self.zainteresirani.all().count()
 
 
 class Objava(models.Model):

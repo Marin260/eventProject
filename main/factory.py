@@ -41,9 +41,9 @@ class EventFactory(factory.django.DjangoModelFactory):
     vrijeme_odrzavanja = factory.Faker("time")
     cijena_ulaza =factory.Faker("numerify")
     mjesto_odrzavanja = factory.Iterator(Mjesto.objects.all())
-    zainteresirani =factory.Faker("numerify")
-    dolaze =factory.Faker("numerify")
-    korisnici = models.ManyToManyField(User, default=None, blank=True)
+    #zainteresirani =factory.Faker("numerify")
+    #dolaze =factory.Faker("numerify")
+    #korisnici = models.ManyToManyField(User, default=None, blank=True)
 
 
 
