@@ -52,8 +52,9 @@
             {% if user.is_authenticated %}
                 
                 <div class="grid grid-cols-2">
-                    <button type="button" onclick="addDol({{ event.id }}, 1)"  value="{{ event.id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
-                    <button type="button" onclick="addDol({{ event.id }}, 2)" value="{{ event.id }}" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                    <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+
+                    <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
                 </div>
             {% endif %}
         </div>

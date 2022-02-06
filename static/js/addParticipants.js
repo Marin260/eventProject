@@ -1,52 +1,29 @@
-// var dolazeBtn = document.getElementById('add-dolazim').addEventListener('click', function(e){
-//     e.preventDefault()
-//     console.log('presed')
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.onload = function() {
-        
-//         document.getElementById("test").innerHTML = this.responseText;
-//     }
-//     xhttp.open(
-//         'GET',
-//         '{% url "dolazim" %}',);
-//     xhttp.send();
-// })
+const btn1 = document.querySelectorAll('.btn-dolazim')
+const btn2 = document.querySelectorAll('.btn-zainteresiran')
 
-function addDol(eid, field) {
-    //e.preventDefault()
-    $.ajax({
-        type: 'POST',
+for(const btns of [btn1, btn2]){
+    btns.forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault()
+            const id = e.target.getAttribute('data-id')
+            const field = e.target.getAttribute('data-field')
+            postDolaze(id, parseInt(field))
+        })
+    })
+}
+
+const postDolaze = (id, field) => {
+    $.post({
         url: '/addPeopleToEvent/',
         data: {
-            eventid: eid, //send id
+            eventid: id, //send id
             modelField: field, //send type field
             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),//,'{{csrf_token}}'
             action: 'post'
         },
-        success: function(json){
-            var htmlFiled = (field == 1) ? 'dolaze' : 'zainteresirani'
-            var htmlId = htmlFiled + '-' + eid
-            document.getElementById(htmlId).innerHTML = htmlFiled + ': ' + json['result']
-            console.log(json)
-        },
-        error: function(xhr, errmsg, err){}
-    })
+    }).done(json => {
+        var htmlField = (field == 1) ? 'dolaze' : 'zainteresirani'
+        document.querySelector(`#${htmlField}-${id}`).innerHTML = htmlField + ': ' + json['result']
+        console.log(json)
+    }).fail()
 }
-
-// $(document).on('click', '#add-dolazim', function(e){
-//     e.preventDefault()
-//     $.ajax({
-//         type: 'POST',
-//         url: '/dolazim/',
-//         data: {
-//             eventid: $('#add-dolazim').val(),
-//             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),//,'{{csrf_token}}'
-//             action: 'post'
-//         },
-//         success: function(json){
-//             document.getElementById('dolaze').innerHTML = 'dolaze: ' + json['result']
-//             console.log(json)
-//         },
-//         error: function(xhr, errmsg, err){}
-//     })
-// })
