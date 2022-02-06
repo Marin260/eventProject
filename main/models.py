@@ -35,7 +35,9 @@ class Event(models.Model):
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
     zainteresirani = models.ManyToManyField(User, default=None, blank=True, related_name="zainteresirani")
+    broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
+    broj_dolaze = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     #korisnici = models.ManyToManyField(User, default=None, blank=True)
 
     def __str__(self):
