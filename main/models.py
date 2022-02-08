@@ -1,3 +1,4 @@
+from xml.parsers.expat import model
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator
@@ -29,7 +30,7 @@ class Event(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     naziv_eventa = models.CharField(max_length = 100)
     datum_odrzavanja = models.DateField()
-    opis_eventa = models.CharField(max_length = 500)
+    opis_eventa = models.TextField()
     placanje_ulaza = models.BooleanField()
     vrijeme_odrzavanja = models.TimeField()
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
@@ -38,6 +39,7 @@ class Event(models.Model):
     broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
     broj_dolaze = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    adresa = models.CharField(max_length=100, default='')
     slug = models.CharField(max_length = 100, default='') #when viewing post detail url shoudl be /id/slug 
     #korisnici = models.ManyToManyField(User, default=None, blank=True)
 
