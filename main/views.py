@@ -2,12 +2,13 @@ from unittest import result
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 from .models import *
 
 def homepage(request):
     events = Event.objects.all().order_by('-date_posted')
     context = {'events' : events}
-    return render(request, "./base_generic.html", context)
+    return render(request, "./main/home.html", context)
 
 @login_required
 def addPeopleToEvent(request):
@@ -43,3 +44,7 @@ def addPeopleToEvent(request):
             result = event.broj_zainteresiranih
         event.save()
         return JsonResponse({'result':result})
+
+
+class EventDetailView(DetailView):
+    model = Event

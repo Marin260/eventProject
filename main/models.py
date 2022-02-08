@@ -38,6 +38,7 @@ class Event(models.Model):
     broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
     broj_dolaze = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    slug = models.CharField(max_length = 100, default='') #when viewing post detail url shoudl be /id/slug 
     #korisnici = models.ManyToManyField(User, default=None, blank=True)
 
     def __str__(self):
