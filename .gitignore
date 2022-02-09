@@ -2,7 +2,7 @@ eventProject/__pycache__/
 main/__pycache__/
 main/migrations/
 main/migrations/__pycache__/
-.venv
+
 
 # Environments
 .env
@@ -12,4 +12,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+event_env/
+event_env
 
