@@ -10,3 +10,6 @@ urlpatterns = [
     path('event/<int:pk>/<slug:slug>/update', views.EventUpdateView.as_view(), name='event-update'),
     path('event/<int:pk>/<slug:slug>/delete', views.EventDeleteView.as_view(), name='event-delete')
 ]
+
+handler404 = 'main.views.handler404' #needed for custom 404
+handler403 = 'main.views.handler403' #needed for custom 403

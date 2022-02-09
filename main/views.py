@@ -95,3 +95,11 @@ class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
     
+
+def handler404(request, *args, **argv):
+    #custom 404
+    return render(request, '404.html')
+    
+def handler403(request, *args, **argv):
+    #custom 403
+    return render(request, '403.html')
