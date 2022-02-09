@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
-<div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto">
+<div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto mb-8">
     <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
         <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="https://laravelnews.imgix.net/images/tailwindcss.png?ixlib=php-3.3.1" />
         <div class="p-4">
@@ -32,7 +32,4 @@
         {% endif %}
     </div>
 </div>
-<br>
-    <h1>{{event.id}}</h1>
-    <p>Ovdje treba detaljnije prikazat event</p>
 {% endblock content %}

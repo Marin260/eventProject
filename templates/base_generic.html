@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    {% csrf_token %}
 
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script defer src="{% static './js/addParticipants.js' %}"></script>
@@ -23,7 +22,7 @@
                 {% if user.is_authenticated %}
                     <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'account_logout' %}">Logout</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="#">Create</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'create-event' %}">Create</a><br>
                 {% else %}
                     <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'account_login' %}">Login</a><br>
