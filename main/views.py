@@ -1,10 +1,10 @@
 from unittest import result
 from urllib import request
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from .models import *
 
 def homepage(request):
@@ -59,4 +59,39 @@ class EventCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.autor_objave = self.request.user
         return super().form_valid(form)
+
+class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Event
+    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa']
+
+    def form_valid(self, form):
+        #insert the curnet loged in user as event author
+        form.instance.autor_objave = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        """
+        UserPassesTestMixin will run this function to test if
+        current loged in user is the event author
+        403 Forbidden if he is not the author
+        """
+        post = self.get_object()
+        if self.request.user == post.autor_objave:
+            return True
+        return False
+
+class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Event
+    success_url = '/' #redirect to /
+
+    """
+    UserPassesTestMixin will run this function to test if
+    current loged in user is the event author
+    403 Forbidden if he is not the author
+    """
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.autor_objave:
+            return True
+        return False
     
