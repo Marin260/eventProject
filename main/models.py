@@ -3,7 +3,9 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
+from jupyterlab_server import slugify
 
 
 class Mjesto(models.Model):
@@ -28,20 +30,21 @@ class AdminKorisnici(models.Model):
 
 class Event(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
+
     naziv_eventa = models.CharField(max_length = 100)
-    datum_odrzavanja = models.DateField()
     opis_eventa = models.TextField()
-    placanje_ulaza = models.BooleanField()
+    datum_odrzavanja = models.DateField()
     vrijeme_odrzavanja = models.TimeField()
+    placanje_ulaza = models.BooleanField()
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
+    adresa = models.CharField(max_length=100, default='')
+
     zainteresirani = models.ManyToManyField(User, default=None, blank=True, related_name="zainteresirani")
     broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
     broj_dolaze = models.IntegerField(validators=[MinValueValidator(0)], default=0)
-    adresa = models.CharField(max_length=100, default='')
-    slug = models.CharField(max_length = 100, default='') #when viewing post detail url shoudl be /id/slug 
-    #korisnici = models.ManyToManyField(User, default=None, blank=True)
+    autor_objave = models.ForeignKey(User, on_delete=CASCADE, default=None, blank=True, null=True)
 
     def __str__(self):
         return self.naziv_eventa
@@ -58,6 +61,15 @@ class Event(models.Model):
         return the count of users intrested in attending the event
         """
         return self.zainteresirani.all().count()
+
+    def get_absolute_url(self):
+        """
+        used when new event form is submited
+        redirects to the new created event detail view
+        """
+        
+        return reverse("event-detail", kwargs={"pk": self.pk, 'slug':self.naziv_eventa.replace(' ', '-').lower()}) 
+    
 
 
 class Objava(models.Model):

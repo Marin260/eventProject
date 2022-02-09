@@ -1,8 +1,10 @@
 from unittest import result
+from urllib import request
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from .models import *
 
 def homepage(request):
@@ -48,3 +50,13 @@ def addPeopleToEvent(request):
 
 class EventDetailView(DetailView):
     model = Event
+
+
+class EventCreateView(LoginRequiredMixin, CreateView):
+    model = Event
+    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa']
+
+    def form_valid(self, form):
+        form.instance.autor_objave = self.request.user
+        return super().form_valid(form)
+    
