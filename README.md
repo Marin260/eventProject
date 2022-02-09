@@ -15,7 +15,7 @@ Klasa Mjesto sadrži informacije o pojedinom mjestu - poštanski broj, naziv mje
 - [x] update events model (relation with user model)
 - [x] update number of users attending event
 - [ ] creating admin users? (TBD if needed)
-- [ ] admin can create/delete/update new events? (TBD if only admin permission)
+- [ ] edit: ~~admin~~ user can create/delete/update new events? (TBD if only admin permission)
 - [ ] admin can add image to event
 - [ ] creating new events
 - [ ] style the website
