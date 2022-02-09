@@ -40,7 +40,7 @@ class EventFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Event
 
-    naziv_eventa = title
+    naziv_eventa = factory.Faker("sentence")
     datum_odrzavanja = factory.Faker("date")
     opis_eventa = factory.Faker("sentence")
     placanje_ulaza =factory.Faker("boolean")

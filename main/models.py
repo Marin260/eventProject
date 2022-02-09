@@ -1,11 +1,9 @@
-from xml.parsers.expat import model
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
-from jupyterlab_server import slugify
 
 
 class Mjesto(models.Model):
