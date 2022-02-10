@@ -23,6 +23,7 @@
             <p id="dolaze-{{ event.id }}" class="font-light text-sm">dolaze: {{event.broj_dolaze}}</p>
         </div>
         {% if user.is_authenticated %}
+            {% csrf_token %}
             {% if event.autor_objave == user %}
                 <div class="grid grid-cols-2">
                     <a href="{% url 'event-update' event.id event.naziv_eventa|slugify %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</a>
