@@ -12,6 +12,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     def save(self, *args, **kwargs):
+        #lower the size of the picture then sve it
         super().save(*args, **kwargs)
         
         img = Image.open(self.image.path)
