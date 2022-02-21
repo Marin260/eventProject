@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'userProfile.apps.UserprofileConfig',
 
     'allauth',
     'allauth.account',
@@ -143,6 +144,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # update to s3 bucket later on
+MEDIA_URL = '/media/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

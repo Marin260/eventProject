@@ -2,7 +2,7 @@
 {% block content %}
 <div class="p-7 gap-4 grid grid-cols-1 w-full pt-24">
     {% for event in events %}
-        <a href="{% url 'event-detail' event.id event.naziv_eventa|slugify%}" class="sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto">
+        <a href="{% url 'event-detail' event.id event.naziv_eventa|slugify %}" class="sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto">
             <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 transition-shadow hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
                 <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="https://laravelnews.imgix.net/images/tailwindcss.png?ixlib=php-3.3.1" />
                 <div class="p-4">
@@ -24,16 +24,16 @@
                     <p id="zainteresirani-{{ event.id }}" class="font-light text-sm">zainteresirani: {{event.broj_zainteresiranih}}</p>
                     <p id="dolaze-{{ event.id }}" class="font-light text-sm">dolaze: {{event.broj_dolaze}}</p>
                 </div>
-                {% if user.is_authenticated %}
-                    {% csrf_token %}
-                    
-                    <div class="grid grid-cols-2">
-                        <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
-    
-                        <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
-                    </div>
-                {% endif %}
             </div>
+            {% if user.is_authenticated %}
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-2">
+                    <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+
+                    <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                </div>
+            {% endif %}
         </a>
         <br>
     {% endfor %}
