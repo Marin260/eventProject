@@ -4,6 +4,8 @@ from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from slugify import slugify
+
 
 
 class Mjesto(models.Model):
@@ -65,8 +67,7 @@ class Event(models.Model):
         used when new event form is submited
         redirects to the new created event detail view
         """
-        
-        return reverse("event-detail", kwargs={"pk": self.pk, 'slug':self.naziv_eventa.replace(' ', '-').lower()}) 
+        return reverse("event-detail", kwargs={"pk": self.pk, 'slug':slugify(self.naziv_eventa)}) 
     
 
 
