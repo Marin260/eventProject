@@ -102,6 +102,7 @@ class AuthorProfileDetailView(DetailView):
     def get_object(self):
         UserName= self.kwargs.get("username")
         return get_object_or_404(User, username=UserName)
+
     
 
 def handler404(request, *args, **argv):

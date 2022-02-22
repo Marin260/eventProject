@@ -7,6 +7,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User,  on_delete=CASCADE)
     bio = models.CharField(max_length=150, default='')
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    location = models.CharField(max_length=150, default='')
+    webstranica = models.CharField(max_length=150, default='')
+    firma = models.CharField(max_length=150, default='')
 
     def __str__(self):
         return f'{self.user.username} Profile'
