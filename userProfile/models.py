@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
 from PIL import Image
+from django.urls import reverse
 
 class Profile(models.Model):
     user = models.OneToOneField(User,  on_delete=CASCADE)
@@ -24,3 +25,10 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+    def get_absolute_url(self):
+        """
+        used when new event form is submited
+        redirects to the new created event detail view
+        """
+        return reverse("profile-detail", kwargs={"username": self.user.username}) 

@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="pt-64 mx-auto mb-8">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Update</button>
+</form>
+
+</div>
+
+
+{% endblock content %}
