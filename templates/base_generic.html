@@ -27,6 +27,7 @@
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_logout' %}">Logout</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'event-create' %}">Create</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'profile-detail' user.username %}">Profile</a><br>
                 {% else %}
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_login' %}">Login</a><br>
