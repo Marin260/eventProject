@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
 <div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto mb-8">
-    <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200">
+    <div class="w-full cursor-pointer rounded-md bg-stone-100">
         <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="{{ event.slika.url }}" />
         <div class="p-4">
         <span class="text-blue-600 font-normal text-base">{{event.mjesto_odrzavanja}} : {{event.adresa}}</span>
@@ -26,17 +26,18 @@
         </div>
     </div>
     {% if user.is_authenticated %}
+        {% csrf_token %}
         {% if event.autor_objave == user %}
             <div class="grid grid-cols-2">
-                <a href="{% url 'event-update' event.id event.naziv_eventa|slugify %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</a>
+                <a href="{% url 'event-update' event.id event.naziv_eventa|slugify %}" class="bg-sky-500 hover:bg-green-500 transition-colors text-white font-bold py-2 px-4 rounded">Update</a>
     
-                <a href="{% url 'event-delete' event.id event.naziv_eventa|slugify %}" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+                <a href="{% url 'event-delete' event.id event.naziv_eventa|slugify %}" class="bg-rose-500 hover:bg-rose-900 transition-colors text-white font-bold py-2 px-4 rounded">Delete</a>
             </div>
         {% else %}
             <div class="grid grid-cols-2">
-                <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dolazim</button>
+                <button type="button" data-id="{{ event.id }}" data-field="1" value="{{ event.id }}" class="btn-dolazim bg-sky-500 hover:bg-green-500 transition-colors text-white font-bold py-2 px-4 rounded">Dolazim</button>
     
-                <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
+                <button type="button" data-id="{{ event.id }}" data-field="2" value="{{ event.id }}" class="btn-zainteresiran bg-amber-400 hover:bg-green-500 transition-colors text-white font-bold py-2 px-4 rounded">Zainteresiran</button>
             </div>
         {% endif %}
     {% endif %}
