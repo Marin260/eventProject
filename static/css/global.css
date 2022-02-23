@@ -1,0 +1,8 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.grad {
+    background: rgb(2,0,36);
+    background: linear-gradient(142deg, rgba(2,0,36,1) 0%, rgba(43,0,117,1) 0%, rgba(0,140,208,1) 100%);
+}

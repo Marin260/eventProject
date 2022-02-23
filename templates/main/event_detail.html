@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
-<div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto mb-8">
-    <div class="w-full cursor-pointer rounded-md bg-stone-100">
+<div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto mb-8 shadow-gray-200 shadow-lg" >
+    <div class="w-full cursor-pointer rounded-md bg-stone-100 shadow-gray-200 shadow-lg">
         <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="{{ event.slika.url }}" />
         <div class="p-4">
         <span class="text-blue-600 font-normal text-base">{{event.mjesto_odrzavanja}} : {{event.adresa}}</span>
