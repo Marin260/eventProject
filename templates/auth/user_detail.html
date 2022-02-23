@@ -26,7 +26,7 @@
                         type="button"
                         style="transition: all 0.15s ease 0s;"
                       >
-                        Connect
+                        Edit profile
                     </a>
                     </div>
                   </div>
@@ -71,9 +71,6 @@
                       <p class="mb-4 text-lg leading-relaxed text-gray-800">
                         {{ user.profile.bio }}
                       </p>
-                      <a href="#pablo" class="font-normal text-pink-500"
-                        >Show more</a
-                      >
                     </div>
                   </div>
                 </div>
@@ -81,12 +78,15 @@
             </div>
           </div>
 
+<div class="mt-10 text-center">
+  <p>Objave ovog korisnika: </p>
+</div>
           <!--Printing out data-->
           <div class="p-7 gap-4 grid grid-cols-1 w-full pt-24">
             {% for event in event_list %}
                 <a href="{% url 'event-detail' event.id event.naziv_eventa|slugify %}" class="sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto">
                     <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 transition-shadow hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-gray-50">
-                        <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="https://laravelnews.imgix.net/images/tailwindcss.png?ixlib=php-3.3.1" />
+                        <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="{{ event.slika.url }}" />
                         <div class="p-4">
                         <span class="text-blue-600 font-normal text-base">{{event.mjesto_odrzavanja}}</span>
                         <p class="font-semibold text-xl py-2">{{event.naziv_eventa}}</p>
