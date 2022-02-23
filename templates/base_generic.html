@@ -27,7 +27,8 @@
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_logout' %}">Logout</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'event-create' %}">Create</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'profile-detail' user.username %}">Profile</a><br>
+                    <a class="fixed px-8 py-5 right-0 md:right-10 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'profile-detail' user.username %}"><div class="flex"><img class="w-7 h-7 mr-3 rounded-full" src="{{ user.profile.image.url }}" /><div class="invisible md:visible">{{ user.username }}</div></div></a><br>
+                    
                 {% else %}
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
                     <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_login' %}">Login</a><br>
