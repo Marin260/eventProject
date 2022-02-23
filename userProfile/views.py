@@ -69,3 +69,4 @@ def profileCreation(request):
     #return redirect("main_homepage")
     return redirect("profile-detail", username = request.user.username)
 
+

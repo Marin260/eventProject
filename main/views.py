@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from .models import *
@@ -101,6 +101,15 @@ class AuthorProfileDetailView(DetailView):
         UserName= self.kwargs.get("username")
         return get_object_or_404(User, username=UserName)
 
+
+def landing(request):
+    return render(request, 'landing.html')
+
+def emptyRedirect(request):
+    if request.user.is_authenticated:
+        return redirect('main_homepage')
+    else:
+        return redirect('account_login')
 
 
 def handler404(request, *args, **argv):
