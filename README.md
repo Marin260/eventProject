@@ -20,7 +20,7 @@ Klasa Mjesto sadrži informacije o pojedinom mjestu - poštanski broj, naziv mje
 - [x] add more fields to user
 - [ ] creating admin users? (TBD if needed)
 - [x] edit: ~~admin~~ user can create/delete/update new events? (TBD if only admin permission)
-- [ ] add img field to event creation
+- [x] add img field to event creation
 - [x] creating new events
 - [ ] style the website
     - [ ] style landing

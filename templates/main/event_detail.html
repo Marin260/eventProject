@@ -2,7 +2,7 @@
 {% block content %}
 <div class="pt-24 sm:w-full md:w-4/5 lg:w-3/4 xl:w-3/6 mx-auto mb-8">
     <div class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200">
-        <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="https://laravelnews.imgix.net/images/tailwindcss.png?ixlib=php-3.3.1" />
+        <img class="aspect-video bg-cover w-full rounded-t-md min-h-40" src="{{ event.slika.url }}" />
         <div class="p-4">
         <span class="text-blue-600 font-normal text-base">{{event.mjesto_odrzavanja}} : {{event.adresa}}</span>
         <p class="font-semibold text-xl py-2">{{event.naziv_eventa}}</p>

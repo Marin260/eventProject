@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from slugify import slugify
+from PIL import Image
 
 
 
@@ -30,7 +31,6 @@ class AdminKorisnici(models.Model):
 
 class Event(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
-
     naziv_eventa = models.CharField(max_length = 100)
     opis_eventa = models.TextField()
     datum_odrzavanja = models.DateField()
@@ -39,7 +39,7 @@ class Event(models.Model):
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
     adresa = models.CharField(max_length=100, default='')
-
+    slika = models.ImageField(default='default_event.png', upload_to='event_pics')
     zainteresirani = models.ManyToManyField(User, default=None, blank=True, related_name="zainteresirani")
     broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
@@ -68,10 +68,21 @@ class Event(models.Model):
         redirects to the new created event detail view
         """
         return reverse("event-detail", kwargs={"pk": self.pk, 'slug':slugify(self.naziv_eventa)}) 
+
+    def save(self, *args, **kwargs):
+        #lower the size of the picture then sve it
+        super().save(*args, **kwargs)
+        
+        img = Image.open(self.slika.path)
+
+        if img.height > 720 or img.width > 1280:
+            output_size = (1280, 720)
+            img.thumbnail(output_size)
+            img.save(self.slika.path)
     
 
 
-class Objava(models.Model):
+class Objava(models.Model):     #todo delete, this is not used
     naslov_objave = models.CharField(max_length = 100)
     vrijeme_objave = models.DateTimeField()
     datum_objave = models.DateTimeField()

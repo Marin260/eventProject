@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="pt-24 content bg-slate-200">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form}}
         <button type="submit">Post</button>
