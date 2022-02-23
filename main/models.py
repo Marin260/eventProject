@@ -17,18 +17,6 @@ class Mjesto(models.Model):
     def __str__(self):
         return self.naziv_mjesta
 
-
-class AdminKorisnici(models.Model):
-    adresa_ustanove = models.CharField(max_length = 150)
-    naziv_admina = models.CharField(max_length = 50)
-    kontakt_admina = models.CharField(max_length = 20)
-    password = models.CharField(max_length=1000)
-    mjesto = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
-
-    def __str__(self):
-        return self.naziv_admina
-
-
 class Event(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     naziv_eventa = models.CharField(max_length = 100)
@@ -79,18 +67,5 @@ class Event(models.Model):
             output_size = (1280, 720)
             img.thumbnail(output_size)
             img.save(self.slika.path)
-    
-
-
-class Objava(models.Model):     #todo delete, this is not used
-    naslov_objave = models.CharField(max_length = 100)
-    vrijeme_objave = models.DateTimeField()
-    datum_objave = models.DateTimeField()
-    opis_objave = models.CharField(max_length = 500)
-    autor_objave = models.ForeignKey(AdminKorisnici, on_delete=CASCADE, default=None, blank=True, null=True)
-    event = models.ForeignKey(Event, on_delete=CASCADE, default=None, blank=True, null=True)
-
-    def __str__(self):
-        return self.naslov_objave
 
 
