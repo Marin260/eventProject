@@ -1,16 +1,31 @@
 {% extends "base_generic.html" %}
 {% block content %}
-
-<div class="pt-24">
+<style> 
+    input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+      }
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+    </style>
+<div class="grid place-items-center pt-64">
 
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Sign in</p>
 
 {% block form %}
-
-<h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -32,20 +47,22 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
+<p class="font-semibold text-xl py-2">{% blocktrans %}If you have not created an account yet, then please
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+
+<div class="w-full max-w-xs">
+<form class="login bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
     {{ form.as_p }}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-    <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    <button class="primaryAction bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{% trans "Sign In" %}</button>
 </form>
-
+</div>
 {% endblock %}
 
 </div>
