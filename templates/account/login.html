@@ -1,72 +1,61 @@
 {% extends "base_generic.html" %}
+
 {% block content %}
-<style> 
-    input[type=text] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: 2px solid gray;
-        border-radius: 4px;
-      }
-    input[type=password] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: 2px solid gray;
-        border-radius: 4px;
-    }
-</style>
-<div class="grid place-items-center pt-64">
 
-{% load i18n %}
-{% load account socialaccount %}
+<div class="container" style="display: flex; height: 100px; width: 100wh;">
+    <div class="img-section" style="flex-grow: 1; "></div>
+    <div class="txt-section" style="flex-grow: 1;">
+        <div class="grid place-items-center pt-64">
 
-<p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Prijava</p>
-
-{% block form %}
-
-{% get_providers as socialaccount_providers %}
-
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-    <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-    </ul>
-
-    <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p class="font-semibold text-xl py-2">{% blocktrans %}Ako se još niste učlanili, odite na
-<a href="{{ signup_url }}" style="color: blue">stranicu za učlanjenje</a> prvo.{% endblocktrans %}</p>
-{% endif %}
-
-
-<div class="w-full max-w-xs">
-<form class="login bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <!-- <a class="button secondaryAction" style="color: blue" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
-    <div class="grid place-items-center px-8 pt-6 mb-4">
-        <button class="primaryAction bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{% trans "Prijava" %}</button>
+            {% load i18n %}
+            {% load account socialaccount %}
+            
+            <p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Prijava</p>
+            
+            {% block form %}
+            
+            {% get_providers as socialaccount_providers %}
+            
+            {% if socialaccount_providers %}
+            <p>{% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+            
+            <div class="socialaccount_ballot">
+            
+                <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+            
+                <div class="login-or">{% trans 'or' %}</div>
+            
+            </div>
+            
+            {% include "socialaccount/snippets/login_extra.html" %}
+            
+            {% else %}
+            <p class="font-semibold text-xl py-2">{% blocktrans %}Ako se još niste učlanili, odite na
+            <a href="{{ signup_url }}" style="color: blue">stranicu za učlanjenje</a> prvo.{% endblocktrans %}</p>
+            {% endif %}
+            
+            
+            <div class="w-full max-w-xs">
+            <form class="login bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <!-- <a class="button secondaryAction" style="color: blue" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
+                <div class="grid place-items-center px-8 pt-6 mb-4">
+                    <button class="primaryAction bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{% trans "Prijava" %}</button>
+                </div>
+            </form>
+            </div>
+            {% endblock %}
+            
+            </div>
     </div>
-</form>
-</div>
-{% endblock %}
-
 </div>
 
 {% endblock content %}
