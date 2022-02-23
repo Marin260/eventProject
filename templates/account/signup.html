@@ -33,9 +33,9 @@
 </style>
 <div class="grid place-items-center pt-64">
 
-<p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Sign up</p>
+<p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Učlanite se</p>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<p>{% blocktrans %}Ako već imate račun, molimo <a href="{{ login_url }}" style="color: blue">prijavite se</a>.{% endblocktrans %}</p>
 
 <form class="signup bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
@@ -43,7 +43,9 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{% trans "Sign Up" %} &raquo;</button>
+  <div class="grid place-items-center px-8 pt-6 mb-4">
+  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{% trans "Učlani se" %} &raquo;</button>
+  </div>
 </form>
 
 </div>

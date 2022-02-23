@@ -1,10 +1,15 @@
 {% extends "base_generic.html" %}
 {% block content %}
-<div class="pt-24 content bg-slate-200">
-    <form method="POST">
+<div class="grid place-items-center pt-24" >
+    <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {% csrf_token %}
-        <h1>Confirm delete</h1>
-        <button type="submit">Delete</button>
+        <h1>Molimo potvrdite brisanje ove objave.</h1><br>
+        <div class="flex">
+        <em>Napomena: brisanje je permanentno!</em><br>
+        </div>
+        <div class="grid place-items-center px-8 pt-6 mb-4">
+            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Izbriši</button>
+        </div>
     </form>
 </div>
 
