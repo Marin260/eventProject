@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="container" style="display: flex; height: 100px; width: 100wh;">
-    <div class="img-section" style="flex-grow: 1; "></div>
-    <div class="txt-section" style="flex-grow: 1;">
+<div class="landing flex">
+    <div class="img-section"></div>
+    <div class="txt-section">
         <div class="grid place-items-center pt-64">
 
             {% load i18n %}
@@ -34,27 +34,26 @@
             {% include "socialaccount/snippets/login_extra.html" %}
             
             {% else %}
-            <p class="font-semibold text-xl py-2">{% blocktrans %}Ako se još niste učlanili, odite na
-            <a href="{{ signup_url }}" style="color: blue">stranicu za učlanjenje</a> prvo.{% endblocktrans %}</p>
+            <p class="font-semibold text-xl py-2">{% blocktrans %}Nemate račun? Stvorite
+            <a href="{{ signup_url }}" style="color: blue">novi račun</a>.{% endblocktrans %}</p>
             {% endif %}
             
             
-            <div class="w-full max-w-xs">
-            <form class="login bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{% url 'account_login' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <!-- <a class="button secondaryAction" style="color: blue" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
-                <div class="grid place-items-center px-8 pt-6 mb-4">
-                    <button class="primaryAction bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{% trans "Prijava" %}</button>
-                </div>
-            </form>
+            <div class="mt-6 w-full max-w-xs">
+                <form class="login bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <!-- <a class="button secondaryAction" style="color: blue" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a> -->
+                    <div class="grid place-items-center px-8 pt-6 mb-4">
+                        <button class="primaryAction bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">{% trans "Prijava" %}</button>
+                    </div>
+                </form>
             </div>
             {% endblock %}
-            
-            </div>
+        </div>
     </div>
 </div>
 

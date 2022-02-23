@@ -27,7 +27,7 @@ class Event(models.Model):
     cijena_ulaza = models.IntegerField(validators=[MinValueValidator(0)])
     mjesto_odrzavanja = models.ForeignKey(Mjesto, on_delete=CASCADE, default=None, blank=True, null=True)
     adresa = models.CharField(max_length=100, default='')
-    slika = models.ImageField(default='default_event.png', upload_to='event_pics')
+    slika = models.ImageField(default='default_event.jpg', upload_to='event_pics')
     zainteresirani = models.ManyToManyField(User, default=None, blank=True, related_name="zainteresirani")
     broj_zainteresiranih = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     dolaze = models.ManyToManyField(User, default=None, blank=True, related_name="dolaze")
