@@ -13,13 +13,18 @@ class MjestoFactory(factory.django.DjangoModelFactory):
     drazava = factory.Faker("country")
 
 
+fake = Faker()
+text = fake.words(nb=200)
+text = ' '.join([word for word in text])
+
+
 class EventFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Event
 
     naziv_eventa = factory.Faker("sentence")
     datum_odrzavanja = factory.Faker("date")
-    opis_eventa = factory.Faker("sentence")
+    opis_eventa = text
     placanje_ulaza =factory.Faker("boolean")
     vrijeme_odrzavanja = factory.Faker("time")
     cijena_ulaza =factory.Faker("numerify")
