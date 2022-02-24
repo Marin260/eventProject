@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
+#import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '02567c16cdb76232155ea35dc9c51a1173aa1dfe2f672c9b31'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('EVENT_DEBUG')
 
-ALLOWED_HOSTS = ['event-pzw.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'userProfile.apps.UserprofileConfig',
 
     'allauth',
     'allauth.account',
@@ -144,13 +145,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # update to s3 bucket later on
+MEDIA_URL = '/media/'
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/browse/'
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profileCreate/'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
@@ -158,4 +164,4 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

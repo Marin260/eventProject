@@ -10,23 +10,29 @@
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script defer src="{% static './js/addParticipants.js' %}"></script>
     <script defer src="{% static './js/hideNav.js' %}"></script>
+    <script defer src="{% static './js/toTop.js' %}"></script>
 
+    <link rel="stylesheet" href="{% static './css/global.css' %}">
     <link rel="stylesheet" href="{% static './css/navCustom.css' %}">
 
     <title>Homepage</title>
 </head>
-<body>
+<body class="bg-slate-50">
+    <img src="{% static './img/eventsAppLogo.png' %}" class="fixed w-12 h-12 left-10 top-2 z-50" id="logo">
     <header class="w-full nav-container fixed">
-        <nav class="bg-slate-100">
+        
+        <nav class="bg-slate-100 grad">
             <div class="w-fit flex mx-auto">
                 {% if user.is_authenticated %}
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'main_homepage' %}">Home</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'account_logout' %}">Logout</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'event-create' %}">Create</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_logout' %}">Logout</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'event-create' %}">Create</a><br>
+                    <a class="fixed px-8 py-5 right-0 md:right-10 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'profile-detail' user.username %}"><div class="flex"><img class="w-7 h-7 mr-3 rounded-full" style="box-shadow: 0px 0px 0px 3px white;" src="{{ user.profile.image.url }}" /><div class="invisible md:visible">{{ user.username }}</div></div></a><br>
+                    
                 {% else %}
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'main_homepage' %}">Home</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'account_login' %}">Login</a><br>
-                    <a class="px-8 py-5 transition-colors ease-in-out bg-slate-100 hover:bg-slate-200" href="{% url 'account_signup' %}">Sign Up</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'main_homepage' %}">Home</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_login' %}">Login</a><br>
+                    <a class="px-8 py-5 transition-colors ease-in-out hover:bg-slate-50 bg-transparent text-white hover:text-black" href="{% url 'account_signup' %}">Sign Up</a><br>
                 {% endif %}
             </div>
         </nav> 

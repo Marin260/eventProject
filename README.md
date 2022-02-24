@@ -14,11 +14,19 @@ Klasa Mjesto sadrži informacije o pojedinom mjestu - poštanski broj, naziv mje
 - [x] create login, signup with django-allauth
 - [x] update events model (relation with user model)
 - [x] update number of users attending event
+- [x] create basic user view
+- [x] display events created by the selected user   
+- [x] user can change picture and update profile
+- [x] add more fields to user
 - [ ] creating admin users? (TBD if needed)
 - [x] edit: ~~admin~~ user can create/delete/update new events? (TBD if only admin permission)
-- [ ] admin can add image to event
+- [x] add img field to event creation
 - [x] creating new events
 - [ ] style the website
+    - [ ] style landing
+    - [ ] style events
+    - [ ] style forms
+    - [ ] style user view
 
 ###### Later plans
 - [ ] google registration (with allauth)

@@ -1,12 +1,74 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
-<div class="pt-24 content bg-slate-200">
-    <form method="POST">
+<style> 
+    input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+      }
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+    input[type=number] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+    input[type=file] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+    textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid gray;
+        border-radius: 4px; 
+    }
+    .headingBlueFont {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+</style>
+
+<div class="grid place-items-center pt-20">
+
+<p class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600 headingBlueFont">Unesi informacije o eventu</p>
+
+<div class="w-full sm:max-w-sm xl:max-w-2xl">
+    <form method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {% csrf_token %}
         {{form}}
-        <button type="submit">Post</button>
+        <div class="grid place-items-center px-8 pt-6 mb-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Unesi</button>
+        </div>
     </form>
+</div>
+
 </div>
 
 {% endblock content %}

@@ -12,24 +12,6 @@ class MjestoFactory(factory.django.DjangoModelFactory):
     naziv_mjesta = factory.Faker("city")
     drazava = factory.Faker("country")
 
-class AdminKorisniciFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = AdminKorisnici
-
-    adresa_ustanove = factory.Faker("address")
-    naziv_admina = factory.Faker("company")
-    kontakt_admina =factory.Faker("numerify")
-    mjesto = factory.Iterator(Mjesto.objects.all())
-
-class ObjavaFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Objava
-
-    naslov_objave = factory.Faker("paragraph")
-    vrijeme_objave = factory.Faker("date_time")
-    datum_objave = factory.Faker("date_time")
-    opis_objave = factory.Faker("paragraph")
-    autor_objave = factory.Iterator(AdminKorisnici.objects.all())
 
 fake = Faker()
 text = fake.words(nb=200)
@@ -42,7 +24,7 @@ class EventFactory(factory.django.DjangoModelFactory):
 
     naziv_eventa = factory.Faker("sentence")
     datum_odrzavanja = factory.Faker("date")
-    opis_eventa = factory.Faker("sentence")
+    opis_eventa = text
     placanje_ulaza =factory.Faker("boolean")
     vrijeme_odrzavanja = factory.Faker("time")
     cijena_ulaza =factory.Faker("numerify")

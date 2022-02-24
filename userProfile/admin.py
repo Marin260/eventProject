@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import * 
-ListModels = [Mjesto, Event,]
+from userProfile.models import * 
+ListModels = [Profile]
 
 admin.site.register(ListModels)

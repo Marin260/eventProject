@@ -21,7 +21,7 @@ venv.bak/
 *.pyc
 __pycache__
 db.sqlite3
-media
+
 
 # Python # 
 *.py[cod] 

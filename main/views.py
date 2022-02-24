@@ -1,8 +1,6 @@
-from unittest import result
-from urllib import request
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from .models import *
@@ -54,7 +52,7 @@ class EventDetailView(DetailView):
 
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
-    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa']
+    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa', 'slika']
 
     def form_valid(self, form):
         form.instance.autor_objave = self.request.user
@@ -62,7 +60,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
 class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
-    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa']
+    fields = ['naziv_eventa', 'opis_eventa', 'datum_odrzavanja', 'vrijeme_odrzavanja', 'placanje_ulaza', 'cijena_ulaza', 'mjesto_odrzavanja', 'adresa', 'slika']
 
     def form_valid(self, form):
         #insert the curnet loged in user as event author
@@ -94,7 +92,25 @@ class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.autor_objave:
             return True
         return False
-    
+
+
+class AuthorProfileDetailView(DetailView):
+    model = User
+
+    def get_object(self):
+        UserName= self.kwargs.get("username")
+        return get_object_or_404(User, username=UserName)
+
+
+def landing(request):
+    return render(request, 'landing.html')
+
+def emptyRedirect(request):
+    if request.user.is_authenticated:
+        return redirect('main_homepage')
+    else:
+        return redirect('account_login')
+
 
 def handler404(request, *args, **argv):
     #custom 404
