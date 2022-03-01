@@ -24,6 +24,7 @@ Aplikacija služi za prikaz raznih događanja (u ovoj aplikaciji nazvani *Eventi
     - [ ] style events
     - [ ] style forms
     - [ ] style user view
+- [ ] connect with S3
 
 ###### Later plans
 - [ ] google registration (with allauth)
